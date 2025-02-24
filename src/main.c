@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjurdana <pjurdana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:18:43 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/19 13:55:29 by pjurdana         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:35:47 by quentin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ int	main(int argc, char **argv)
 			ft_clear_maplines(&map_lines);
 		return (1);
 	}
-
 	map_parse = ft_prep_tab(&map_lines, &map_tab);
+	int i = 0;
+	while (map_tab[i])
+	{
+		// printf("%s", (map_tab)[i]);
+		i++;
+	}
 	if (map_parse != 0)
 	{
 		error_case(map_parse);
@@ -49,20 +54,13 @@ int	main(int argc, char **argv)
 			ft_clear_maplines(&map_lines);
 		return (1);
 	}
-
-	// int i = 0;
-	// while (map_tab[i])
-	// {
-	// 	printf("%s", (map_tab)[i]);
-	// 	i++;
-	// }
+	ft_init_mlx(map_tab);
 
 
 	ft_clear_tab(map_tab);
-	ft_init(&map_tab);
-	printf("\nGG\n\n");
-	// ft_clear_maplines(&map_lines);
 
+	printf("GG");
+	ft_clear_maplines(&map_lines);
 	return (0);
 }
 
