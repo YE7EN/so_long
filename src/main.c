@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	int i = 0;
 	while (map_tab[i])
 	{
-		// printf("%s", (map_tab)[i]);
+		printf("%s", (map_tab)[i]);
 		i++;
 	}
 	if (map_parse != 0)

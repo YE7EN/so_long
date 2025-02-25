@@ -49,7 +49,7 @@ void ft_init_map(t_map **map_lst, char ***map_tab)
 			exit(EXIT_FAILURE);
 		}
 		ft_strcpy(nav->map_line, (*map_tab)[i]);
-		// printf("%s\n", (*map_tab)[i]);
+		printf("%s\n", (*map_tab)[i]);
 		nav = nav->next;
 	}
 	(*map_tab)[++i] = NULL;

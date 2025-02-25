@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjurdana <pjurdana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: quentin <quentin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:05:59 by quentin           #+#    #+#             */
-/*   Updated: 2025/02/19 12:20:27 by pjurdana         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:15:31 by quentin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,78 @@ typedef struct s_tab_map
 
 typedef struct s_map
 {
-    char    *map_line;
-    int     len;
-    int     index_line;
-	struct s_map *previous;
-    struct s_map *next;
-}   t_map;
+	char			*map_line;
+	int				len;
+	int				index_line;
+	struct s_map	*previous;
+	struct s_map	*next;
+}				t_map;
 
-typedef struct mlx_opt
+typedef struct s_win
 {
-    void    *mlx;
-    void    *mlx_win;
-    void    *img;
-    int     width;
-    int     height;
-}                   mlx_opt;
+	void	*mlx_ptr;
+	void	*mlx_win;
+	int		width;
+	int		height;
+    int     counter;
+}				t_win;
 
-typedef struct s_data
+typedef struct s_image
 {
-    //void	*img;
-    char	*addr;
-    int		bpp; // bit per pixel
-    int		line_length;
+	t_win	win;
+	void	*img_ptr;
+	char	*addr;
+	int		height;
+	int		width;
+	int		bpp; // bit per pixel
 	int		endian;
-}                   t_data;
+	int		line_len;
+	char 	**map; //map de jeu
+}				t_image ;
+
+//!!!!!!!!!!!	ENUM KEYCODE    !!!!!!!!!!!!!!!!!!!!!!!!!!/
+enum KeyCode {
+    KEY_A = XK_a,
+    KEY_B = XK_b,
+    KEY_C = XK_c,
+    KEY_D = XK_d,
+    KEY_E = XK_e,
+    KEY_F = XK_f,
+    KEY_G = XK_g,
+    KEY_H = XK_h,
+    KEY_I = XK_i,
+    KEY_J = XK_j,
+    KEY_K = XK_k,
+    KEY_L = XK_l,
+    KEY_M = XK_m,
+    KEY_N = XK_n,
+    KEY_O = XK_o,
+    KEY_P = XK_p,
+    KEY_Q = XK_q,
+    KEY_R = XK_r,
+    KEY_S = XK_s,
+    KEY_T = XK_t,
+    KEY_U = XK_u,
+    KEY_V = XK_v,
+    KEY_W = XK_w,
+    KEY_X = XK_x,
+    KEY_Y = XK_y,
+    KEY_Z = XK_z,
+    KEY_SPACE = XK_space,
+    KEY_ENTER = XK_Return,
+    KEY_ESCAPE = XK_Escape,
+    KEY_BACKSPACE = XK_BackSpace,
+    KEY_TAB = XK_Tab,
+    KEY_SHIFT_L = XK_Shift_L,
+    KEY_SHIFT_R = XK_Shift_R,
+    KEY_CTRL_L = XK_Control_L,
+    KEY_CTRL_R = XK_Control_R,
+    KEY_ALT_L = XK_Alt_L,
+    KEY_ALT_R = XK_Alt_R
+};
+//!!!!!!!!!!!	ENUM KEYCODE    !!!!!!!!!!!!!!!!!!!!!!!!!!/
+
+
 
 //!!!!!!!!!!!   ERRORS COLORS   !!!!!!!!!!!!!!!!!!!!!!!!!!/
 # define RESET_COLOR	"\x1b[0m"
@@ -76,7 +124,7 @@ int		ft_lst_map_size(t_map *lst_map);
 
 ////////////*keymap.c////////////////
 int	esc_key_press(void *params);
-int	key_press(int keycode, void *params);
+int	key_press(int keycode, t_image *params);
 int	cross_click(void *params);
 
 ////////////*handle_errors.c////////////////
@@ -102,11 +150,30 @@ void	ft_clear_tab(char **tab);
 ////////////*ft_flood_fill.c////////////////
 int	ft_prep_tab(t_map **map_lst, char ***map_tab);
 int	ft_flood_fill(char **map_tab, int *c, int x, int y);
-void	ft_case_pos(char **map_tab, int *c, int x, int y);
 
 ////////////*ft_get_pos.c////////////////
 int	ft_get_pos_x(char **map_tab);
 int	ft_get_pos_y(char **map_tab);
+
+////////////*ft_init_mlx.c////////////////
+t_win	new_launch(int width, int height,char *str);
+t_image	new_img(int width, int height, t_win mlx_win, char **map);
+int		ft_init_mlx(char **map_tab);
+void	put_pixel_img(t_image img, int x, int y, int color);
+int		exit_so_long(t_win *mlx_win);
+void	ft_put_img_on_map(t_image *img_48x48);
+
+////////////*ft_init_mlx.c////////////////
+void	move_to_right(t_image img);
+void	move_to_left(t_image img);
+void	move_up(t_image img);
+void	move_down(t_image img);
+
+////////////*move_couner.c////////////////
+void	counter_on_window(t_image img);
+
+
+
 
 
 
